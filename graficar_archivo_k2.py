@@ -1,5 +1,9 @@
 # script para graficar un archivo de mediciones .med del instrumento K2
 
+# Pendientes:
+# 1) que escriba el archivo tempora en el mismo path del original
+# 2) generar correctamente la columna 't'
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
