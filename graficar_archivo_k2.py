@@ -6,14 +6,22 @@ import numpy as np
 
 # Configuración del script:
 
-nombre_archivo = "archivo_prueba_convertir_k2_en_csv.txt"
+path = '/home/mariano/Docs-GoogleDrive/Descargas/23_SensRadSat/irrad-sr90-fading/'
+nombre_archivo = 'Track Vt - 05-06-2023_CD4007_para_sate_irrad_fading.med.txt'
+paso_temporal = 2 # paso temporal del archivo de datos en segundos
 canales_activos = ['c1', 'c2'] #lista de canales activos
 rango_t=[0,0] # rango de tiempo a graficar en seg ([0,0] grafica todo)
 rango_y=[0,0] # rango del eje y a graficar ([0,0] grafica todo)
 tit='Titulo grafico'
 
 # abrir el archivo
-f_in=open(nombre_archivo,'r')
+f_in=open(path + nombre_archivo,'r')
+
+# OBS: probar de reescribir usando 'with' ... por ejemplo:
+# with open("geeksforgeeks.txt","r") as gfg_file:
+#    file_content = gfg_file.read()
+#    print(file_content)
+
 
 # saltear el encabezado y buscar el inicio de los datos:
 linea_actual=f_in.readline()
