@@ -1,2 +1,3 @@
 # marianogh03_graficos
 Scripts para levantar datos de un archivo (en particular del k2), genera dataframe y grafica...
+El path de datos es: path = /home/mariano/Docs-GoogleDrive/Descargas/23_SensRadSat/irrad-sr90-fading/
