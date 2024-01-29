@@ -5,8 +5,8 @@
 # 4) df.plot(x="Time", y=["Y[1]", "Y[3]"])
 # 5) luego se puede usar iloc o loc para seleccionar filas..
 
-archivo_de_entrada="archivo_prueba_convertir_k2_en_csv.txt"
-archivo_de_salida ="archivo_prueba_convertir_k2_en_csv.csv"
+archivo_de_entrada="/home/mariano/git-proyectos/marianogh03_graficos/a.txt"
+archivo_de_salida ="/home/mariano/git-proyectos/marianogh03_graficos/a.csv"
 
 # abrir el archivo
 f_in=open(archivo_de_entrada,'r')
