@@ -13,8 +13,8 @@ import numpy as np
 #nombre_archivo = 'site2.1_tile4_device23_-5to5_0C.csv'
 #ruta_archivo = ruta_base + ruta_especifica + nombre_archivo
 
-ruta_base = "/home/mariano/github/marianogh03_graficos/"
-ruta_especifica = ""
+ruta_base = "/home/mariano/github/"
+ruta_especifica = "marianogh03_graficos/"
 nombre_archivo = "a.csv"
 ruta_archivo = ruta_base + ruta_especifica + nombre_archivo
 
@@ -23,6 +23,8 @@ df = pd.read_csv( ruta_archivo )
 
 df.rename(columns = {'time':'Date'}, inplace = True)
 df.rename(columns = {'Y[0]':'Y00', 'Y[1]':'Y01', 'Y[2]':'Y02','Y[3]':'Y03','Y[4]':'Y04' }, inplace = True)
+df.rename(columns = {'Y[5]':'Y05', 'Y[6]':'Y06', 'Y[7]':'Y07','Y[8]':'Y08','Y[9]':'Y09' }, inplace = True)
+df.rename(columns = {'Y[10]':'Y10', 'Y[11]':'Y11' }, inplace = True)
 
 # agregar columna de tiempo en segundos time(s) siendo que la primera columna es un string con la fecha y hora: "31/12/1903  21:00:00.000000"
 date_str = df.iat[0,0]
@@ -51,9 +53,9 @@ print(df)
 #df.plot(x='v_a', y='i_a', title=nombre_archivo, marker='x', linestyle='dashed', color='blue')
 
 
-df.plot(x='Time(s)', y='Y00', logy=True, title=nombre_archivo, marker='o', linestyle='dashed', color='red')
-df.plot(x='Time(s)', y='Y[8]', logy=True, title=nombre_archivo, marker='o', linestyle='dashed', color='blue')
-df.plot(x='Time(s)', y='Y[9]', logy=True, title=nombre_archivo, marker='o', linestyle='dashed', color='green')
+df.plot(x='Time(s)', y='Y00', title=nombre_archivo, marker='o', linestyle='dashed', color='red')
+df.plot(x='Time(s)', y='Y08', title=nombre_archivo, marker='o', linestyle='dashed', color='blue')
+df.plot(x='Time(s)', y='Y09', title=nombre_archivo, marker='o', linestyle='dashed', color='green')
 
 plt.show(block=False)
 plt.show()
