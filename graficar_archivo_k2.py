@@ -10,7 +10,8 @@ import numpy as np
 
 # Configuración del script:
 
-path = '/home/mariano/Docs-GoogleDrive/Descargas/23_SensRadSat/irrad-sr90-fading/'
+
+path = '/home/mariano/Docs-GoogleDrive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
 nombre_archivo = 'Track Vt - 05-06-2023_CD4007_para_sate_irrad_fading.med.txt'
 paso_temporal = 2 # paso temporal del archivo de datos en segundos
 canales_activos = ['c1', 'c2'] #lista de canales activos
