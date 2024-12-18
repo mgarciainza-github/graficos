@@ -23,8 +23,8 @@ plt.show(block=False)
 # otro grafico con algunas filas seleccionadas con iloc
 #df2=df.iloc[0:4,] 
 #df2=df.iloc[0:4,:2] 
-df2=df.iloc[2:7,:]
-tit2='df2=df.iloc[2:7,:]'
+df2=df.iloc[2:5]
+tit2='df2=df.iloc[2:5]'
 print(f'datos df2: \n{df2}')
 df2.plot(x='tiempo', y=['med_1','med_3','med_2'], title=tit2, linewidth=3, marker ='*'); 
 plt.show(block=False)
@@ -39,5 +39,14 @@ plt.show(block=False)
 df3.plot(x='tiempo', y=['med_3'], title=tit3, linestyle='dashed', marker='o'); 
 plt.show(block=False)
 
+
+print('\n ------------------------\n')
+i=2
+for _ in range(10):
+    print(_)
+
+print('----------------------------')
+print(df.iloc[1,1])
+
 # espera enter para cerrar las figuras
-input()
+#input()

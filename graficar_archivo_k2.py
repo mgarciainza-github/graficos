@@ -7,6 +7,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 # Configuración del script:
 
@@ -15,7 +16,7 @@ path = '/home/mariano/Docs-GoogleDrive/Escritorio/varios/2023 varios/Sensor Radi
 nombre_archivo = 'Track Vt - 05-06-2023_CD4007_para_sate_irrad_fading.med.txt'
 paso_temporal = 2 # paso temporal del archivo de datos en segundos
 canales_activos = ['c1', 'c2'] #lista de canales activos
-rango_t=[0,0] # rango de tiempo a graficar en seg ([0,0] grafica todo)
+rango_t=[0,500] # rango de tiempo a graficar en seg ([0,0] grafica todo)
 rango_y=[0,0] # rango del eje y a graficar ([0,0] grafica todo)
 tit='Titulo grafico'
 
@@ -37,7 +38,7 @@ while linea_actual != '':
         linea_actual=f_in.readline()
 
 # reemplazar tab por coma en archivo temp
-f_out=open("archivo_temp.csv",'w')
+f_out=open(path + "archivo_temp2.csv",'w')
 linea_nueva=''
 while linea_actual != '':
     linea_nueva=linea_actual.replace('\t',',')
@@ -53,15 +54,26 @@ f_out.close()
 
 # Dataframe
 
-df = pd.read_csv('archivo_temp.csv')
+df = pd.read_csv(path + 'archivo_temp2.csv')
+os.remove(path + 'archivo_temp2.csv')
 #df.colums= ['t','c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11']
-df.rename(columns={'time':'fecha', 'Y[0]':'c1','Y[1]':'c2','Y[2]':'c3','Y[3]':'c4','Y[4]':'c5','Y[5]':'c6','Y[6]':'c7','Y[7]':'c8','Y[8]':'c9','Y[9]':'c10','Y[10]':'c11','Y[11]':'c12'}, inplace=True)
+df.rename(columns={'time':'fecha', 'Y[0]':'c1','Y[1]':'c2','Y[2]':'c3','Y[3]':'c4', \
+                   'Y[4]':'c5','Y[5]':'c6','Y[6]':'c7','Y[7]':'c8','Y[8]':'c9', \
+                   'Y[9]':'c10','Y[10]':'c11','Y[11]':'c12'}, inplace=True)
 #print(df)
 #print('==========================\n')
 df['hora']=df['fecha'].str[11:]
 #print(df['fecha'].str[11:])
 df['seg'] = pd.to_timedelta(df['hora']).astype('timedelta64[s]').astype(int)
+for fila in range(len(df)):
+        fila_actual =
+        if fila != len(df):
+             delta_seg = df.iloc[fila]
+        df.at()
+
+
 df['t'] = df['seg']-df['seg'][0]
+df.to_csv(path + 'archivo_temp3.csv', index=False)
 print(df)
 
 
