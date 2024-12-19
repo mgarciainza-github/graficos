@@ -12,11 +12,11 @@ import os
 # Configuración del script:
 
 
-path = '/home/mariano/Docs-GoogleDrive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
+path = '/home/mariano/docs-google-drive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
 nombre_archivo = 'Track Vt - 05-06-2023_CD4007_para_sate_irrad_fading.med.txt'
 paso_temporal = 2 # paso temporal del archivo de datos en segundos
 canales_activos = ['c1', 'c2'] #lista de canales activos
-rango_t=[0,500] # rango de tiempo a graficar en seg ([0,0] grafica todo)
+rango_t=[0,0] # rango de tiempo a graficar en seg ([0,0] grafica todo)
 rango_y=[0,0] # rango del eje y a graficar ([0,0] grafica todo)
 tit='Titulo grafico'
 
@@ -65,19 +65,23 @@ df.rename(columns={'time':'fecha', 'Y[0]':'c1','Y[1]':'c2','Y[2]':'c3','Y[3]':'c
 df['hora']=df['fecha'].str[11:]
 #print(df['fecha'].str[11:])
 df['seg'] = pd.to_timedelta(df['hora']).astype('timedelta64[s]').astype(int)
-for fila in range(len(df)):
-        fila_actual =
-        if fila != len(df):
-             delta_seg = df.iloc[fila]
-        df.at()
+df['t']= 0
+i_col_seg= len(df.columns)-2
+i_col_t =  len(df.columns)-1
+print('for..')
+for fila in range(len(df)-1):
+    delta_seg = df.iloc[fila+1,i_col_seg] - df.iloc[fila,i_col_seg]
+    if delta_seg < 0:
+        delta_seg=delta_seg + 24*3600
+    df.iat[fila+1,i_col_t] = df.iloc[fila,i_col_t] + delta_seg
 
-
-df['t'] = df['seg']-df['seg'][0]
+#df['t'] = df['seg']-df['seg'][0]
 df.to_csv(path + 'archivo_temp3.csv', index=False)
-print(df)
 
-
+print('plot..')
 # grafico:
+#df.plot(y='t')
+#df.plot( y = canales_activos, title =tit , marker='*', linestyle='dashed')
 df.plot(x = 't', y = canales_activos, title =tit , marker='*', linestyle='dashed')
 if rango_y != [0,0]: plt.ylim(rango_y)
 if rango_t != [0,0]: plt.xlim(rango_t)

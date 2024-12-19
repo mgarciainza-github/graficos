@@ -42,8 +42,8 @@ plt.show(block=False)
 
 print('\n ------------------------\n')
 i=2
-for _ in range(10):
-    print(_)
+for i in range(2,10):
+    print(i)
 
 print('----------------------------')
 print(df.iloc[1,1])
