@@ -12,7 +12,8 @@ import os
 # Configuración del script:
 
 
-path = '/home/mariano/docs-google-drive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
+path = '/home/mariano/Docs-GoogleDrive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
+#path = '/home/mariano/docs-google-drive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
 nombre_archivo = 'Track Vt - 05-06-2023_CD4007_para_sate_irrad_fading.med.txt'
 paso_temporal = 2 # paso temporal del archivo de datos en segundos
 canales_activos = ['c1', 'c2'] #lista de canales activos
@@ -53,18 +54,19 @@ f_in.close()
 f_out.close()
 
 # Dataframe
-
 df = pd.read_csv(path + 'archivo_temp2.csv')
 os.remove(path + 'archivo_temp2.csv')
 #df.colums= ['t','c1','c2','c3','c4','c5','c6','c7','c8','c9','c10','c11']
 df.rename(columns={'time':'fecha', 'Y[0]':'c1','Y[1]':'c2','Y[2]':'c3','Y[3]':'c4', \
                    'Y[4]':'c5','Y[5]':'c6','Y[6]':'c7','Y[7]':'c8','Y[8]':'c9', \
                    'Y[9]':'c10','Y[10]':'c11','Y[11]':'c12'}, inplace=True)
-#print(df)
-#print('==========================\n')
+
+# Hay que generar una columna temporal a partir de la fecha y hora:
 df['hora']=df['fecha'].str[11:]
 #print(df['fecha'].str[11:])
 df['seg'] = pd.to_timedelta(df['hora']).astype('timedelta64[s]').astype(int)
+
+# Cuando cambia el día hay un salto en la commna 'seg'. Hay que corregir esa discontinuidad:
 df['t']= 0
 i_col_seg= len(df.columns)-2
 i_col_t =  len(df.columns)-1
@@ -76,7 +78,7 @@ for fila in range(len(df)-1):
     df.iat[fila+1,i_col_t] = df.iloc[fila,i_col_t] + delta_seg
 
 #df['t'] = df['seg']-df['seg'][0]
-df.to_csv(path + 'archivo_temp3.csv', index=False)
+#df.to_csv(path + 'archivo_temp3.csv', index=False)
 
 print('plot..')
 # grafico:
@@ -85,7 +87,9 @@ print('plot..')
 df.plot(x = 't', y = canales_activos, title =tit , marker='*', linestyle='dashed')
 if rango_y != [0,0]: plt.ylim(rango_y)
 if rango_t != [0,0]: plt.xlim(rango_t)
-plt.show(block=False)
+plt.show()
+#plt.show(block=False)
+
 input()
 
 
