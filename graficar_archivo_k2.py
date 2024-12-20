@@ -8,12 +8,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import time
 
 # Configuración del script:
 
 
-path = '/home/mariano/Docs-GoogleDrive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
-#path = '/home/mariano/docs-google-drive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
+#path = '/home/mariano/Docs-GoogleDrive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
+path = '/home/mariano/docs-google-drive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
 nombre_archivo = 'Track Vt - 05-06-2023_CD4007_para_sate_irrad_fading.med.txt'
 paso_temporal = 2 # paso temporal del archivo de datos en segundos
 canales_activos = ['c1', 'c2'] #lista de canales activos
@@ -38,6 +39,7 @@ while linea_actual != '':
     else:
         linea_actual=f_in.readline()
 
+print('generando archivo archivo_temp2.csv ...')
 # reemplazar tab por coma en archivo temp
 f_out=open(path + "archivo_temp2.csv",'w')
 linea_nueva=''
@@ -53,6 +55,7 @@ while linea_actual != '':
 f_in.close()
 f_out.close()
 
+print('generando df..')
 # Dataframe
 df = pd.read_csv(path + 'archivo_temp2.csv')
 os.remove(path + 'archivo_temp2.csv')
@@ -70,11 +73,12 @@ df['seg'] = pd.to_timedelta(df['hora']).astype('timedelta64[s]').astype(int)
 df['t']= 0
 i_col_seg= len(df.columns)-2
 i_col_t =  len(df.columns)-1
-print('for..')
+segundos_dia = 24*3600
+print('generando col t (for)..')
 for fila in range(len(df)-1):
     delta_seg = df.iloc[fila+1,i_col_seg] - df.iloc[fila,i_col_seg]
     if delta_seg < 0:
-        delta_seg=delta_seg + 24*3600
+        delta_seg=delta_seg + segundos_dia
     df.iat[fila+1,i_col_t] = df.iloc[fila,i_col_t] + delta_seg
 
 #df['t'] = df['seg']-df['seg'][0]
@@ -90,7 +94,7 @@ if rango_t != [0,0]: plt.xlim(rango_t)
 plt.show()
 #plt.show(block=False)
 
-input()
+#input()
 
 
 # # Busqueda del inicio de los datos dentro del archivo .med
