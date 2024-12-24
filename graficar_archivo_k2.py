@@ -1,17 +1,11 @@
 # script para graficar un archivo de mediciones .med del instrumento K2
 
-# Pendientes:
-# 1) que escriba el archivo tempora en el mismo path del original
-# 2) generar correctamente la columna 't'
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import os
 
 # Configuración del script:
-
-
 path = '/home/mariano/Docs-GoogleDrive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
 #path = '/home/mariano/docs-google-drive/Escritorio/varios/2023 varios/Sensor Radiacion Satelite 2023/irrad-sr90-fading/'
 nombre_archivo = 'Track Vt - 05-06-2023_CD4007_para_sate_irrad_fading.med.txt'
@@ -89,10 +83,11 @@ if rango_y != [0,0]: plt.ylim(rango_y)
 if rango_t != [0,0]: plt.xlim(rango_t)
 plt.show()
 #plt.show(block=False)
+#input()
 
-input()
 
 
+# REVISAR ANTES DE BORRAR:
 # # Busqueda del inicio de los datos dentro del archivo .med
 # linea_actual = f_archivo.readline()
 # while linea_actual != '':
