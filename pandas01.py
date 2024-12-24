@@ -72,3 +72,19 @@ print('6.2:\n',df_sel4,end='\n\n')
 df_sel5 = df[df['c1'].str.match('xt') ]
 print('6.3:\n',df_sel5,end='\n\n')
 
+print('0.2:\n',df2,end='\n\n')
+df2.loc['indice_2','c2']='22'
+df2.iloc[0,0]='00'
+df2.loc['indice_2',:]=['a','b','c']
+print('0.2:\n',df2,end='\n\n')
+
+
+#esto no funciona:
+#df2.c1.loc[indice_2]=['a_']
+#print('0.2:\n',df2.c1,end='\n\n')
+
+df2.c1[0]='a_'
+print('0.3:\n',df2,end='\n\n')
+
+df2.c2[:]=['c2_1', 'c2_2']
+print('0.4:\n',df2,end='\n\n')
