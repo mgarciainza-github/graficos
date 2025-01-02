@@ -1,5 +1,9 @@
 # script para graficar un dit a patir de archivos de csv obtenido de mediciones CV multifrec en Nanolab 
 
+# Pendientes:
+# 1. Automatizar la manipulacion de archivos: indicar la fecha y que haga todo solo...
+# 2. Guardar los resultados: df con dits e imágenes de los gráficos
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -48,10 +52,10 @@ plt.show(block=False)
 '''
 
 # Dit
-# tomo el valor de cox a f=1k en acumulación Vg=1
-df_cox = df_pre[ (df_pre['f']==1000) & (df_pre['Vg']==1) ]
-df_cox.reset_index(inplace=True)
-cox=df_cox.loc[0,'Cp']
+## tomo el valor de cox a f=1k en acumulación Vg=1
+# df_cox = df_pre[ (df_pre['f']==1000) & (df_pre['Vg']==1) ]
+# df_cox.reset_index(inplace=True)
+# cox=df_cox.loc[0,'Cp']
 q = 1.60217663e-19 # Coul
 A = 200*200e-8 # cm-2
 ax=None

@@ -49,4 +49,4 @@ print('----------------------------')
 print(df.iloc[1,1])
 
 # espera enter para cerrar las figuras
-#input()
+input()
